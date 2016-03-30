@@ -1,0 +1,11 @@
+Running sm-bbt-in.txt
+Running sm-friends-in.txt
+Running sm-illiad-in.txt
+Running sm-kt-p-4-in.txt
+Running sm-kt-p-5-in.txt
+Running sm-random-500-in.txt
+Running sm-random-50-in.txt
+Running sm-random-5-in.txt
+Running sm-worst-500-in.txt
+Running sm-worst-50-in.txt
+Running sm-worst-5-in.txt
