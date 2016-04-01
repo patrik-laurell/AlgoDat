@@ -1,0 +1,32 @@
+\documentclass{tufte-handout}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}
+\usepackage{booktabs}
+\usepackage{microtype}
+
+\pagestyle{empty}
+
+
+\title{Stable Matching Report}
+\author{Patrik Laurell and Olle Kjellqvist}
+
+\begin{document}
+  \maketitle
+
+  \section{Results}
+
+  Our implementation produces the expected results on all input--output file pairs. 
+
+  \section{Implementation details}
+
+  The men's preferences are stored in an array where the index of the array corresponds to priority (0 being lowest) and the value refers to the id of the woman. We use an instance variable to keep track of the last woman he proposed to. This means that we find the next woman to propose to in $O(1)$.
+  The women's preferences are also stored in an array, but here the index relates to the id of the man, and the value to the priority. This means that we can compare the woman's preference of two men in $O(1)$.
+  The men are stored in a LinkedList, where a man, as soon as taken, is removed. In that way we can find a free man who hasn't proposed to every woman in $O(1)$.
+
+  With these data structures, our implementation runs in time $O(n^2)$ on inputs with $n$ men and $n$ women.
+
+In order to verify our code we wrote a shell (bash) script that wrote STDOUT to a file and compared that to the given .out files for all of the test cases.
+
+
+\end{document}
