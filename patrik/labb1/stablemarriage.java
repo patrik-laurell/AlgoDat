@@ -18,12 +18,50 @@ class StableMarriage {
         Scanner sc = new Scanner(System.in);
         String line;
         boolean readNames = true;
+        do {
+            line = sc.nextLine();
+        } while(line.startsWith("#"));
+
+        women = new Woman[Integer.parseInt(line.substring(2))];
+        manArray = new Man[Integer.parseInt(line.substring(2))];
+
+        line = sc.nextLine();
+        while (!line.isEmpty()) {
+                int id = Integer.parseInt(line.substring(0, line.indexOf(' ')));
+                String name = line.substring(line.indexOf(' ') + 1);
+                if(id % 2 == 0) {
+                    women[(id-1)/2] = new Woman(name);
+                } else {
+                    Man m = new Man((id-1)/2, name);
+                    men.add(m);
+                    manArray[(id-1)/2] = m;
+                }
+            line = sc.nextLine();
+        }
+
         while(sc.hasNextLine()) {
+            line = sc.nextLine();
+            int id = Integer.parseInt(line.substring(0, line.indexOf(':')));
+            String[] strprefs = line.substring(line.indexOf(':') + 2).split(" ");
+            int[] prefs = new int[strprefs.length];
+            if(id % 2 != 0) {
+                for(int i=0; i<prefs.length; i++) {
+                    prefs[i] = (Integer.parseInt(strprefs[i])-1)/2;
+                }
+                manArray[(id-1)/2].preferences = prefs;
+            } else {
+                for(int i=0; i<prefs.length; i++) {
+                    prefs[(Integer.parseInt(strprefs[i])-1)/2] = i;
+                }
+                women[(id-1)/2].preferences = prefs;
+            }
+
+        }
+
+        /*while(sc.hasNextLine()) {
             line = sc.nextLine();
             if(line.equals("")) {
                 readNames = false;
-                continue;
-            } else if(line.charAt(0) == '#') {
                 continue;
             } else if(line.charAt(0) == 'n') {
                 women = new Woman[Integer.parseInt(line.substring(2))];
@@ -54,7 +92,7 @@ class StableMarriage {
                     women[(id-1)/2].preferences = prefs;
                 }
             }
-        }
+        }*/
     }
 
     private static void matchMake() {

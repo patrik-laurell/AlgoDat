@@ -1,10 +1,10 @@
 #!/bin/bash
 
-for l in $(ls ../algdes-labs/matching/data/*in.txt)
+for l in $(ls ../../algdes-labs/matching/data/*in.txt)
 do
     name=${l##*/}
     echo "Running "$name
     name=${name%-*}-out.txt
-    java StableMarriage < $l > $name
+    time (java StableMarriage < $l > $name)
     diff ${l%/*}/$name $name
 done
