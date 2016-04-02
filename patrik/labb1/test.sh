@@ -1,5 +1,7 @@
 #!/bin/bash
 
+javac stablemarriage.java
+
 for l in $(ls ../../algdes-labs/matching/data/*in.txt)
 do
     name=${l##*/}
@@ -8,3 +10,5 @@ do
     time (java StableMarriage < $l > $name)
     diff ${l%/*}/$name $name
 done
+
+rm *out.txt
