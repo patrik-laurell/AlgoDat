@@ -10,21 +10,25 @@ public class WL {
 
 	public static void main(String[] args) {
 		try {
-			//FileInputStream fis = new FileInputStream(new File("words-10.txt"));
+			FileInputStream fis = new FileInputStream(new File("words-5757.txt"));
 			HashMap<String, LinkedList<Word>> graph = new HashMap<String, LinkedList<Word>>();
 			LinkedList<Integer> dist = new LinkedList<Integer>();
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 			String line = br.readLine();
 			while (line !=null) {
 				buildGraph(graph, line);
 				line = br.readLine();
 			}
+			br.close();
+			fis = new FileInputStream(new File("words-5757-in.txt"));
+			br = new BufferedReader(new InputStreamReader(fis));
 			line = br.readLine();
 			while (line != null) {
 				String[] words = line.split(" ");
 				dist.offer(getDistance(words[0], words[1], graph));
 				line = br.readLine();
 			}
+			br.close();
 			for (Integer distance : dist) {
 				System.out.println(distance);
 			}
@@ -102,6 +106,10 @@ public class WL {
 	}
 
 	private static int getDistance(String start, String fin, HashMap<String, LinkedList<Word>> graph) {
+		
+		if(start.equals(fin)) {
+			return 0;
+		}
 		for (LinkedList<Word> lists : graph.values()) {
 			for (Word word : lists) {
 				for (Word n : word.conTo) {
