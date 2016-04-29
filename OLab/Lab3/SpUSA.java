@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.util.LinkedList;
 import java.io.InputStreamReader;
 import java.util.PriorityQueue;
 import java.util.HashMap;
@@ -21,9 +22,6 @@ public class SpUSA {
 				line = br.readLine();
 			}
 			while (line != null) {
-			//while(!line.startsWith("!")) {
-				//String[] types = line.split(" ");
-				//String[] names = types[0].split("--");
 				int start = line.indexOf('[') + 1;
 				int fin = line.lastIndexOf("]");
 				int dist = Integer.parseInt(line.substring(start, fin));
@@ -36,7 +34,10 @@ public class SpUSA {
 				line = br.readLine();
 			}
 			MST mst = new MST(map, arcs);
-			System.out.println(mst.cumWeight);
+			for (Arc<Node> a : mst.winners) {
+				System.out.println(a.n1 + "--" + a.n2);
+			}
+			System.out.println("cumWeight = " + mst.cumWeight);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -48,10 +49,12 @@ public class SpUSA {
 		private int cumWeight;
 		private PriorityQueue<Arc<Node>> arcs;
 		private HashMap<String, Node> map;
+		private LinkedList<Arc<Node>> winners;
 
 		private MST(HashMap<String, Node> map, PriorityQueue<Arc<Node>> arcs) {
 			this.arcs = arcs;
 			this.map = map;
+			winners = new LinkedList<Arc<Node>>();
 			cumWeight = 0;
 			Kruskal();
 		}
@@ -64,6 +67,7 @@ public class SpUSA {
 				Arc<Node> a = arcs.poll();
 				if (union(a.n1, a.n2)) {
 					cumWeight = cumWeight + a.dist;
+					winners.add(a);
 				}
 			}
 		}
@@ -103,6 +107,9 @@ public class SpUSA {
 		private Node(String name) {
 			this.name = name;
 			rank = 0;
+		}
+		public String toString() {
+			return name;
 		}
 	}
 

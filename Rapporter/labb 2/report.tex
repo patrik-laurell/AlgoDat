@@ -19,7 +19,6 @@
   Our implementation produces the expected results on all input--output file pairs
   \section{Implementation details}
 
-We implement the graph by iterating once over all of the nodes, and once over all of the directed edges (twice for undirected). This means that we iterate for all relevant combination of letters for each node, which gives us $O(n + m + w)$ for building the graph. 
-
-Doing the BFS search gives us a time complexity of $O(n + m)$, so the total worst case asymptotic time for our algorithm is $O(n+m+w)$.
+We implement the graph by iterating once over all of the nodes, $O(n*w)$ for building the graph. 
+Doing the BFS search gives us a time complexity of $O(n + m)$, so the total worst case asymptotic time for our algorithm is $O(n*w + m)$.
 \end{document}
